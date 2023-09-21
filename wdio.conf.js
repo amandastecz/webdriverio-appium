@@ -1,6 +1,6 @@
 const path = require('path');
 
-export const config = {
+exports.config = {
     //
     // ====================
     // Runner Configuration

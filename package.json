@@ -1,6 +1,5 @@
 {
   "name": "my-new-project",
-  "type": "module",
   "devDependencies": {
     "@wdio/appium-service": "^8.16.11",
     "@wdio/cli": "^8.16.11",
