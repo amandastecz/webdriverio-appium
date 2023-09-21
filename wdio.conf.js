@@ -1,3 +1,5 @@
+const path = require('path');
+
 export const config = {
     //
     // ====================
@@ -55,10 +57,10 @@ export const config = {
     capabilities: [{
         // capabilities for local Appium web tests on an Android Emulator
         platformName: 'Android',
-        browserName: 'Chrome',
-        'appium:deviceName': 'Android GoogleAPI Emulator',
+        'appium:deviceName': 'Pixel 3',
         'appium:platformVersion': '12.0',
-        'appium:automationName': 'UiAutomator2'
+        'appium:automationName': 'UiAutomator2',
+        'appium:app': path.join(process.cwd(),'app/android/ApiDemos-debug.apk')
     }],
 
     //
