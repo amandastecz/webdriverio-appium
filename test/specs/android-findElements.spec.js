@@ -24,4 +24,10 @@ describe('Android element tests', ()=>{
         const textAssertion = await $('//android.widget.TextView');
         expect(textAssertion).toHaveText("You selected: 1 , Command two");
     });
+
+    it('Find elements by UIAutomator', async ()=> {
+        // find by text contains
+        // https://appium.readthedocs.io/en/latest/en/writing-running-appium/android/uiautomator-uiselector/
+        await $('android=new UiSelector().textContains("Alert")').click();
+    })
 })
