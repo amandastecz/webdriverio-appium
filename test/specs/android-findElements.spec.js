@@ -1,4 +1,4 @@
-describe.skip('Android element tests', ()=>{
+describe('Android element tests', ()=>{
     it('Find element by accessibility id', async ()=>{
         const appOption = $('~App');
         const actionBar = $('~Action Bar');
@@ -31,7 +31,7 @@ describe.skip('Android element tests', ()=>{
         await $('android=new UiSelector().textContains("Alert")').click();
     });
 
-    it.only('Find multiple elements in WDIO', async () => {
+    it('Find multiple elements in WDIO', async () => {
         const expectList = [
             'API Demos', "Access'ibility",
             'Accessibility', 'Animation',
@@ -48,5 +48,19 @@ describe.skip('Android element tests', ()=>{
             actualList.push(await element.getText());
         };
         await expect(actualList).toEqual(expectList);
-    })
+    });
+
+    it.only('Field country input and verify the value', async ()=>{
+        const country = "Brazil";
+        const countryInputXpath = $('//android.widget.EditText[@resource-id="io.appium.android.apis:id/edit"]');
+        // Access: Views -> Auto Complete -> Screen Top
+        await $('~Views').click();
+        await $('~Auto Complete').click();
+        await $('~1. Screen Top').click();
+        // Enter country name in text field
+        await countryInputXpath.click();
+        await countryInputXpath.setValue(country);
+        // Validate the country name
+        expect(countryInputXpath.getValue()).toHaveText(country);
+    });
 })
