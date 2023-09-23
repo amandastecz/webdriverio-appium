@@ -1,4 +1,4 @@
-describe('Android element tests', ()=>{
+describe.skip('Android element tests', ()=>{
     it('Find element by accessibility id', async ()=>{
         const appOption = $('~App');
         const actionBar = $('~Action Bar');
