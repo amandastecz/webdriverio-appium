@@ -7,12 +7,12 @@ describe('Android element tests', ()=>{
     });
 
     it('Find elements by class name', async ()=> {
+        // in this case will return the first element because of the $ - single element wdio
         const className = $('android.widget.TextView');
         await expect(className).toHaveText("API Demos");
-        // in this case will return the first element because of the $
     });
 
-    it('Find elements by xpath', async ()=> {
+    xit('Find elements by xpath', async ()=> {
         // xpath - (//tagname[@attribute="value"])
         // find by content description
         await $('//android.widget.TextView[@content-desc="Alert Dialogs"]').click();
@@ -29,5 +29,24 @@ describe('Android element tests', ()=>{
         // find by text contains
         // https://appium.readthedocs.io/en/latest/en/writing-running-appium/android/uiautomator-uiselector/
         await $('android=new UiSelector().textContains("Alert")').click();
+    });
+
+    it.only('Find multiple elements in WDIO', async () => {
+        const expectList = [
+            'API Demos', "Access'ibility",
+            'Accessibility', 'Animation',
+            'App', 'Content',
+            'Graphics', 'Media',
+            'NFC', 'OS',
+            'Preference', 'Text',
+            'Views'
+        ];
+        const actualList = [];
+        // find multiples elements using $$ wdio
+        const multipleElements = await $$('android.widget.TextView');
+        for (const element of multipleElements){
+            actualList.push(await element.getText());
+        };
+        await expect(actualList).toEqual(expectList);
     })
 })
