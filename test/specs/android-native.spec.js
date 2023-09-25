@@ -12,7 +12,16 @@ describe('Android native feature tests', ()=>{
         await $('//*[@resource-id="io.appium.android.apis:id/two_buttons"]');
         //accept alert
         await driver.acceptAlert();
+        // await driver.dismissAlert();
         //assertion - alert box is no longer visible
         await expect($('//*[@resource-id="android:id/alertTitle"]')).not.toExist();
+    });
+
+    it.only('Vertical scrolling', async ()=>{
+        await $('~App').click();
+        await $('~Activity').click();
+        await $('android=new UiScrollable(new UiSelector().scrollable(true)).scrollToEnd(1,5)');
+        await $('~Secure Surfaces').click();
+        await expect($('~Secure Dialog').toExist());
     });
 });
