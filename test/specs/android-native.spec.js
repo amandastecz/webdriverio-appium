@@ -20,8 +20,11 @@ describe('Android native feature tests', ()=>{
     it.only('Vertical scrolling', async ()=>{
         await $('~App').click();
         await $('~Activity').click();
-        await $('android=new UiScrollable(new UiSelector().scrollable(true)).scrollToEnd(1,5)');
-        await $('~Secure Surfaces').click();
+        // scroll to end (not stable if element gets moved)
+        // await $('android=new UiScrollable(new UiSelector().scrollable(true)).scrollToEnd(1,5)');
+        // scrollTextIntoView (more stable)
+        await $('android=new UiScrollable(new UiSelector().scrollable(true)).scrollTextIntoView("Secure Surfaces")').click();
+        // await $('~Secure Surfaces').click();
         await expect($('~Secure Dialog').toExist());
     });
 });
