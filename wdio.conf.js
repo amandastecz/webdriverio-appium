@@ -26,7 +26,7 @@ exports.config = {
     //
     specs: [
         // ToDo: define location for spec files here
-        'test/specs/**/android-native*.js'
+        'test/specs/colornote/*.js'
     ],
     // Patterns to exclude.
     exclude: [
@@ -59,8 +59,9 @@ exports.config = {
         platformName: 'Android',
         'appium:deviceName': 'Pixel 4',
         'appium:platformVersion': '11.0',
-        'appium:automationName': 'UIAutomator2',
-        'appium:app': path.join(process.cwd(),'app/android/ApiDemos-debug.apk')
+        'appium:automationName': 'UiAutomator2',
+        'appium:app': path.join(process.cwd(),'./app/android/ColorNote+Notepad.apk'),
+        'appium:autoGrantPermissions': true //allow device permissions
     }],
 
     //
