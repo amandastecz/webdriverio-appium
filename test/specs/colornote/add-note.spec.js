@@ -1,45 +1,47 @@
+const AddNoteScreen = require("../../screenobjects/android/add-note.screen");
+const DeleteNoteScreen = require("../../screenobjects/android/delete-note.screen");
+
 describe('Add notes', ()=>{
     it('Skip tutorial', async ()=>{
-        await $('//*[@resource-id="com.socialnmobile.dictapps.notepad.color.note:id/btn_start_skip"]').click();
-        await expect($('//*[@text="Add note"]')).toBeDisplayed();
+        await AddNoteScreen.skipBtn.click();
+        await expect(AddNoteScreen.addNoteText).toBeDisplayed();
     });
 
     it('Add a note, save changes and verify note', async () => {
-        await $('//*[@text="Add note"]').click();
-        await $('//*[@text="Text"]').click();
-        await expect($('//*[@text="Editing"]')).toBeDisplayed();
+        const titleNote = "Fav anime list";
+        const listNote = "AOT\nNaruto";
+        await AddNoteScreen.addNoteBtn.click();
+        await AddNoteScreen.textOption.click();
+        await expect(AddNoteScreen.textEditing).toBeDisplayed();
         // add note title and body
-        await $('//*[@resource-id="com.socialnmobile.dictapps.notepad.color.note:id/edit_title"]').addValue("Fav anime list");
-        await $('//*[@resource-id="com.socialnmobile.dictapps.notepad.color.note:id/edit_note"]').addValue("AOT\nNaruto");
+        await AddNoteScreen.titleNoteInput.addValue(titleNote);
+        await AddNoteScreen.editingNoteInput.addValue(listNote);
         // save the changes back twice
-        await driver.back();
-        await driver.back();
-        await expect($('//*[@resource-id="com.socialnmobile.dictapps.notepad.color.note:id/edit_btn"]')).toBeDisplayed();
-        await expect($('//*[@resource-id="com.socialnmobile.dictapps.notepad.color.note:id/view_note"]')).toHaveText("AOT\nNaruto");
+        await AddNoteScreen.saveNote();
+        await expect(AddNoteScreen.editButton).toBeDisplayed();
+        await expect(AddNoteScreen.viewNote).toHaveText(listNote);
     });
 
-    it('Add a note, save changes, delete the note and verify in the trash can', async () => {
-        await driver.startActivity("com.socialnmobile.dictapps.notepad.color.note", "com.socialnmobile.colornote.activity.Main");
-        await $('//*[@resource-id="com.socialnmobile.dictapps.notepad.color.note:id/main_btn1"]').click();
-        await $('//*[@text="Text"]').click();
-        await expect($('//*[@text="Editing"]')).toBeDisplayed();
+    it.only('Add a note, save changes, delete the note and verify in the trash can', async () => {
+        const titleNote = "Fav food list";
+        const listNote = "Pasta\nSushi\nHamburguer";
+        await driver.startActivity(AddNoteScreen.appPackage, AddNoteScreen.appActivity);
+        await AddNoteScreen.addNoteBtn.click();
+        await AddNoteScreen.textOption.click();
+        await expect(AddNoteScreen.textEditing).toBeDisplayed();
         // add note title and body
-        await $('//*[@resource-id="com.socialnmobile.dictapps.notepad.color.note:id/edit_title"]').addValue("Fav food list");
-        await $('//*[@resource-id="com.socialnmobile.dictapps.notepad.color.note:id/edit_note"]').addValue("Pasta\nSushi\nHamburguer");
+        await AddNoteScreen.titleNoteInput.addValue(titleNote);
+        await AddNoteScreen.editingNoteInput.addValue(listNote);
         // save the changes back twice
+        await AddNoteScreen.saveNote();
+        await expect(AddNoteScreen.editButton).toBeDisplayed();
+        await expect(AddNoteScreen.viewNote).toHaveText(listNote);
         await driver.back();
-        await driver.back();
-        await expect($('//*[@resource-id="com.socialnmobile.dictapps.notepad.color.note:id/edit_btn"]')).toBeDisplayed();
-        await expect($('//*[@resource-id="com.socialnmobile.dictapps.notepad.color.note:id/view_note"]')).toHaveText("Pasta\nSushi\nHamburguer");
-        await driver.back();
-        await $('//*[@text="Fav food list"]').click();
-        await $('~More').click();
-        await $('//*[@text="Delete"]').click();
-        // Click OK button
-        await driver.acceptAlert();
-        await $('//*[@resource-id="com.socialnmobile.dictapps.notepad.color.note:id/icon_nav"]').click();
-        await $('//*[@text="Trash Can"]').click();
-        await expect($('//*[@resource-id="com.socialnmobile.dictapps.notepad.color.note:id/title"]')).toBeDisplayed();
+        await $(`//*[@text="${titleNote}"]`).click();
+        await DeleteNoteScreen.deleteNote();
+        await DeleteNoteScreen.menuOption.click();
+        await DeleteNoteScreen.trashCanOption.click();
+        await expect(DeleteNoteScreen.trashCanFirstNote).toBeDisplayed();
 
     });
 });
