@@ -26,7 +26,7 @@ exports.config = {
     //
     specs: [
         // ToDo: define location for spec files here
-        'test/specs/colornote/*.js'
+        'test/specs/android/colornote/*.js'
     ],
     // Patterns to exclude.
     exclude: [
