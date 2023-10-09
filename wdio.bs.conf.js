@@ -1,5 +1,3 @@
-const allure = require('allure-commandline')
-
 exports.config = {
     specs: [
         // ToDo: define location for spec files here
@@ -211,13 +209,6 @@ exports.config = {
      * @param {boolean} result.passed    true if test has passed, otherwise false
      * @param {object}  result.retries   information about spec related retries, e.g. `{ attempts: 0, limit: 0 }`
      */
-    afterTest: async function(test, context, { error }) {
-        if (error) {
-            await driver.takeScreenshot();
-        }
-    },
-
-
     /**
      * Hook that gets executed after the suite has ended
      * @param {object} suite suite details
@@ -260,26 +251,6 @@ exports.config = {
      */
     // onComplete: function(exitCode, config, capabilities, results) {
     // },
-    onComplete: function() {
-        const reportError = new Error('Could not generate Allure report')
-        const generation = allure(['generate', 'allure-results', '--clean'])
-        return new Promise((resolve, reject) => {
-            const generationTimeout = setTimeout(
-                () => reject(reportError),
-                5000)
-
-            generation.on('exit', function(exitCode) {
-                clearTimeout(generationTimeout)
-
-                if (exitCode !== 0) {
-                    return reject(reportError)
-                }
-
-                console.log('Allure report successfully generated')
-                resolve()
-            })
-        })
-    },
     /**
     * Gets executed when a refresh happens.
     * @param {string} oldSessionId session ID of the old session
