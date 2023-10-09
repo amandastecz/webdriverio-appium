@@ -19,7 +19,7 @@
     "typescript": "^5.0.4"
   },
   "scripts": {
-    "wdio": "wdio run ./config/wdio.conf.js",    
-    "wdio:bs": "wdio run ./config/wdio.bs.conf.js"
+    "wdio": "wdio run ./wdio.conf.js",    
+    "wdio:bs": "npx wdio ./wdio.bs.conf.js"
   }
 }

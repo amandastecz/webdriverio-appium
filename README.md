@@ -8,4 +8,4 @@ Run: `npx wdio`
 
 ## Running on BrowserStack
 
-Run `npx wdio:bs`
+Run `npm run wdio:bs`
