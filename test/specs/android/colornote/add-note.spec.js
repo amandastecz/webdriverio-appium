@@ -22,7 +22,7 @@ describe('Add notes', ()=>{
         await expect(AddNoteScreen.viewNote).toHaveText(listNote);
     });
 
-    it.only('Add a note, save changes, delete the note and verify in the trash can', async () => {
+    it('Add a note, save changes, delete the note and verify in the trash can', async () => {
         const titleNote = "Fav food list";
         const listNote = "Pasta\nSushi\nHamburguer";
         await driver.startActivity(AddNoteScreen.appPackage, AddNoteScreen.appActivity);

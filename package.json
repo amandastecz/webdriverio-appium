@@ -5,6 +5,7 @@
     "@babel/core": "^7.23.0",
     "@babel/preset-env": "^7.22.20",
     "@babel/register": "^7.22.15",
+    "@wdio/allure-reporter": "^8.16.22",
     "@wdio/appium-service": "^8.16.11",
     "@wdio/browserstack-service": "^8.16.22",
     "@wdio/cli": "^8.16.11",
@@ -19,7 +20,11 @@
     "typescript": "^5.0.4"
   },
   "scripts": {
-    "wdio": "wdio run ./wdio.conf.js",    
-    "wdio:bs": "npx wdio ./wdio.bs.conf.js"
+    "wdio": "wdio run ./wdio.conf.js",
+    "wdio:bs": "npx wdio ./wdio.bs.conf.js",
+    "report": "npx allure open"
+  },
+  "dependencies": {
+    "allure-commandline": "^2.24.1"
   }
 }
