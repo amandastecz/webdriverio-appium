@@ -11,7 +11,7 @@ exports.config = {
     capabilities: [{
         // capabilities for local Appium web tests on an Android Emulator
         platformName: 'Android',
-        'appium:deviceName': 'Pixel 4',
+        'appium:deviceName': 'Google Pixel 4',
         'appium:platformVersion': '11.0',
         'appium:automationName': 'UiAutomator2',
         'appium:app': 'bs://a0944b07ed78dc9be032d58308fe6722f7182dc7',
